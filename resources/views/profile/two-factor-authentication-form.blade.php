@@ -1,9 +1,12 @@
 @if(! auth()->user()->two_factor_secret)
     {{-- Enable 2FA --}}
+    <div class="text-center">
+
+    
     <form method="POST" action="{{ route('two-factor.enable') }}">
         @csrf
 
-        <button type="submit">
+        <button class="btn btn-outline-success mt-auto" type="submit">
             {{ __('Enable Two-Factor') }}
         </button>
     </form>
@@ -13,7 +16,7 @@
         @csrf
         @method('DELETE')
 
-        <button type="submit">
+        <button class="btn btn-outline-success mt-auto" type="submit">
             {{ __('Disable Two-Factor') }}
         </button>
     </form>
@@ -44,9 +47,10 @@
     <form method="POST" action="{{ route('two-factor.recovery-codes') }}">
         @csrf
 
-        <button type="submit">
+        <button class="btn btn-outline-success mt-auto" type="submit">
             {{ __('Regenerate Recovery Codes') }}
         </button>
     </form>
 @endif
 <hr>
+</div>

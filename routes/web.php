@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [IndexController::class, 'index']);
 
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', [IndexController::class, 'session'])
     ->name('dashboard')
-    ->middleware(['auth', 'verified']);
+    ->middleware(['auth']);
 
 Route::get('/dashboard', [menuController::class, 'viewMenu']);
 
@@ -27,4 +27,8 @@ Route::get('/test', [menuController::class, 'viewMenu']);
 
 Route::get('/food', [menuController::class, 'viewDetails']);
 
-Route::get('/insertOrder',[menuController::class,'insertOrder'] );
+Route::get('/insertOrder', [menuController::class, 'insertOrder']);
+
+Route::get('/setting', [menuController::class, 'setting']);
+
+

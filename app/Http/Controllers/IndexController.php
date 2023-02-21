@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -12,9 +13,15 @@ class IndexController extends Controller
         return view('auth.login');
     }
 
+    public function session()
+    {
+        // return view('dashboard');
+    }
+
     public function profile()
     {
     }
+
     public function processLogin()
     {
         $email = $_POST['email'];

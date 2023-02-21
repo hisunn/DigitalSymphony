@@ -12,11 +12,13 @@
                     </div>
                     <p class="lead">{{ $item->description }}</p>
                     <form action="{{ url('/insertOrder') }}" method="GET">
+                        <input type="text" hidden name="price" value="{{ $item->price }}">
+                        <input type="text" hidden name="foodname" value="{{ $item->menu_name }}">
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num"
-                                value="1" style="max-width: 3rem" name="amount" />
-                            <button type="submit" class="ml-2 btn btn-outline-success flex-shrink-0"
-                                name="foodtype" value="{{ $item->id }}">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="number"
+                                min="1" value="1" style="max-width: 4rem" name="amount" />
+                            <button type="submit" class="ml-2 btn btn-outline-success flex-shrink-0" name="foodtype"
+                                value="{{ $item->id }}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to order
                             </button>
