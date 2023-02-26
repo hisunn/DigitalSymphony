@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    @include('head')
-    <body>
-        @include('navbar')
+@include('head')
 
-        @include('detailsCard')
-       
-      @include('footer')
-    </body>
+<body class="d-flex flex-column min-vh-100">
+    @include('navbar')
+
+    @include('detailsCard')
+
+    {{-- <div style="margin-bottom: 15%"></div> --}}
+    @include('footer')
+</body>
+
 </html>

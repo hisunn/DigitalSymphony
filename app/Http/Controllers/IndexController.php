@@ -13,14 +13,6 @@ class IndexController extends Controller
         return view('auth.login');
     }
 
-    public function session()
-    {
-        // return view('dashboard');
-    }
-
-    public function profile()
-    {
-    }
 
     public function processLogin()
     {
@@ -34,13 +26,12 @@ class IndexController extends Controller
         return view('register');
     }
 
-    public function processRegister()
+
+    public function test(Request $request)
     {
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $email = $_POST['email'];
-        $password = $_POST['pwd'];
-        $c_password = $_POST['cpwd'];
-        echo $fname, $lname, $email, $password, $c_password;
+        // var_dump(session('status'));
+
+        var_dump($request->session()->all());
+        // return view('test');
     }
 }

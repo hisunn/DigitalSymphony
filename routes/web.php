@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\menuController;
+use App\Http\Controllers\orderController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,14 +23,24 @@ Route::get('dashboard', [IndexController::class, 'session'])
     ->name('dashboard')
     ->middleware(['auth']);
 
-Route::get('/dashboard', [menuController::class, 'viewMenu']);
+Route::get('dashboard', [menuController::class, 'viewMenu']);
 
-Route::get('/test', [menuController::class, 'viewMenu']);
+Route::get('test', [IndexController::class, 'test']);
 
-Route::get('/food', [menuController::class, 'viewDetails']);
+Route::get('food', [menuController::class, 'viewDetails']);
 
-Route::get('/insertOrder', [menuController::class, 'insertOrder']);
+// Route::get('insertOrder', [menuController::class, 'insertOrder']);
 
-Route::get('/setting', [menuController::class, 'setting']);
+Route::get('setting', [menuController::class, 'setting']);
 
+Route::get('order-list', [orderController::class, 'viewOrder'])->name('orderlist');
+Route::get('payment-gateway', [orderController::class, 'processPayment']);
 
+Route::get('insertOrder', [orderController::class, 'insertOrder'])->name('controltest');
+Route::get('deleteOrder', [orderController::class, 'deleteOrder']);
+Route::get('deleteItem', [orderController::class, 'deleteItem']);
+Route::get('restoreOrder', [orderController::class, 'restoreOrder']);
+Route::get('updateOrder', [orderController::class, 'updateOrder']);
+Route::get('paidOrder', [orderController::class, 'paidOrder']);
+Route::get('successOrder', [orderController::class, 'successOrder']);
+Route::get('order-history', [orderController::class, 'viewHistory']);

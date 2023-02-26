@@ -11,21 +11,37 @@
                         <span>{{ 'RM' . $item->price }}</span>
                     </div>
                     <p class="lead">{{ $item->description }}</p>
-                    <form action="{{ url('/insertOrder') }}" method="GET">
+                    <form id="orderform">
                         <input type="text" hidden name="price" value="{{ $item->price }}">
                         <input type="text" hidden name="foodname" value="{{ $item->menu_name }}">
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="number"
-                                min="1" value="1" style="max-width: 4rem" name="amount" />
-                            <button type="submit" class="ml-2 btn btn-outline-success flex-shrink-0" name="foodtype"
-                                value="{{ $item->id }}">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to order
-                            </button>
-                        </div>
+                        <input type="text" hidden name="url" value="{{ url('/') }}">
+                        <span>Quantity:</span> <label for="inputQuantity">
+                            <input class="form-control text-center" id="inputQuantity" type="number" min="1"
+                                value="1" style="max-width: 4rem" name="amount" /></label>
                     </form>
+                    <button data-bs-toggle="modal" data-bs-target="#orderModal" id="button" onclick="addOrder()"
+                        class="btn btn-outline-success flex-shrink-0 mb-1 mt-2 w-100" name="foodtype"
+                        value="{{ $item->id }}">
+                        <i class="bi bi-bag-fill"></i> Add to order
                 </div>
             </div>
         </div>
+        </div>
     </section>
 @endforeach
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-gray-900" id="orderModalLabel">Order Added !</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body text-gray-800">
+                {{ $item->menu_name }} has successfully added to your order
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
+</div>

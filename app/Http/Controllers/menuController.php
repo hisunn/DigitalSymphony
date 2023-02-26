@@ -18,6 +18,28 @@ class menuController extends Controller
 
     public function viewDetails()
     {
+        $id = auth()->user()->id;
+        // $order_value = DB::select('SELECT (quantity+quantity_temp) AS total FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+
+        $quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+        $quantity_temp = DB::select('SELECT SUM(quantity_temp) AS quantity_temp FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+
+        foreach ($quantity as $quantity) {
+        }
+        foreach ($quantity_temp as $quantity_temp) {
+        }
+
+        $order_quantity = $quantity->quantity;
+        $order_quantity_temp =  $quantity_temp->quantity_temp;
+
+
+        $is_ordering = $order_quantity + $order_quantity_temp;
+
+        if ($order_quantity_temp > 0) {
+
+            return redirect(url('/payment-gateway'));
+        }
+
         $menu_type = $_GET['type'];
 
         $menu = menuModel::where('id', '=', $menu_type)->get();
@@ -25,17 +47,6 @@ class menuController extends Controller
         return view('layouts.food', ['details' => $menu]);
     }
 
-    public function insertOrder()
-    {
-        $order = new orderModel;
-        $menu = $_GET['foodtype'];
-        $menu_name = $_GET['foodname'];
-        $menu_amount = $_GET['amount'];
-        $menu_price = $_GET['price'];
-        $user_id = auth()->user()->id;
-        DB::table('order')->insert([]);
-        var_dump($menu_name);
-    }
 
     public function setting()
     {
