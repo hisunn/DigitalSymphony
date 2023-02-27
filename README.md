@@ -43,14 +43,14 @@ This project is built with a different kind of tools. Here's the list of the one
 * [![JQuery][JQuery.com]][JQuery-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
-
+<!-- 
 ## Snapshot of System
 
 ![Login Screen](./public/readme_content/LoginPage.png)
 ![Dashboard Screen](./public/readme_content/Dashboard.png)
 ![Menu Screen](./public/readme_content/Menu.png)
 ![OrderPage Screen](./public/readme_content/OrderPage.png)
-
+--!>
 
 ## About Laravel
 
