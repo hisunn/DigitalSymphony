@@ -29,10 +29,6 @@
 7. Run php artisan migrate on terminal/cmd
 8. Run php artisan serve on terminal/cmd
 
-### Known bugs 
-- visual bug after clicking to 'your order' page directly after add order (FIXED)
-
-
 ### Built With
 
 This project is built with a different kind of tools. Here's the list of the one I used to create this system.
