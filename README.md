@@ -20,7 +20,7 @@
 8. Run php artisan serve on terminal/cmd
 
 ### Known bugs 
-- visual bug after clicking to 'your order' page directly after add order
+- visual bug after clicking to 'your order' page directly after add order (FIXED)
 
 ## About Laravel
 
