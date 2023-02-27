@@ -22,6 +22,19 @@
 ### Known bugs 
 - visual bug after clicking to 'your order' page directly after add order (FIXED)
 
+
+### Built With
+
+This project is built with a different kind of tools. Here's the list of the one I used to create this system.
+
+* [![Laragon][Laragon.com]][Laragon-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Php][Php.net]][Php-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+* [![Tailwind][Tailwindcss.com]][Tailwind-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
@@ -77,3 +90,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+[Laragon.com]:https://img.shields.io/badge/Laragon-36a4ff?style=for-the-badge&logo=Laragon&logoColor=white
+[Laragon-url]:https://laragon.org/
+[Laravel.com]:https://img.shields.io/badge/Laravel-f32b1f?style=for-the-badge&logo=Laravel&logoColor=white
+[Laravel-url]:https://laravel.com/
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com
