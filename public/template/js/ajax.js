@@ -18,7 +18,8 @@ function addOrder() {
                 foodtype: foodtype,
             },
             success: function (response) {
-                let test = $("#display_quantity").html(response);
+                let change_content_navbar = $("#display_quantity").html(response);
+                let change_value_order = $('input[name="quantity"').attr('value',response);              
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);

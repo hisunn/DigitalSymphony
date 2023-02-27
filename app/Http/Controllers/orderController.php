@@ -16,9 +16,7 @@ class orderController extends Controller
         $session_value = $request->session()->exists('users');
         if ($request->session()->exists('id')) {
 
-            $id = auth()->user()->id;
-            //SELECT menu.menu_image, orders.item_name, orders.quantity, orders.item_price FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=2 ORDER BY orders.item_name;
-            // $sql = DB::select('SELECT paid_at FROM orders WHERE user_id='.$id);
+            $id = auth()->user()->id;  
 
             $quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
             $quantity_temp = DB::select('SELECT SUM(quantity_temp) AS quantity_temp FROM orders WHERE user_id=' . $id . ' LIMIT 1');
@@ -37,9 +35,8 @@ class orderController extends Controller
             }
 
             $sql = DB::select('SELECT menu.menu_image AS item_image, orders.item_name AS item_name, orders.quantity AS item_quantity, orders.item_price AS item_price, orders.item_id AS item_id, orders.deleted_at AS deleted_at  FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=' . $id . ' ORDER BY item_name');
-
+         
             return view('layouts.order')
-                // ->with('order_quantity', $order_quantity)
                 ->with('sql', $sql);
         } else {
             return redirect(url('/login'));
