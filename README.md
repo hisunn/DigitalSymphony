@@ -19,7 +19,7 @@
 7. Run php artisan migrate on terminal/cmd
 8. Run php artisan serve on terminal/cmd
 
-## Known bugs 
+# Known bugs 
 - visual bug after clicking to 'your order' page directly after add order
 
 ## About Laravel
