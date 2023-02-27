@@ -10,7 +10,7 @@
 
 ## How to run system (locally)
 
-1. Clone this project
+1. Clone this project and export db sql inside database/sql 
 2. Go to the folder application using cd command on your cmd or terminal
 3. Run composer install on your cmd or terminal
 4. Copy .env.example file to .env on the root folder
