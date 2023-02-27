@@ -31,7 +31,6 @@ This project is built with a different kind of tools. Here's the list of the one
 * [![Laravel][Laravel.com]][Laravel-url]
 * [![Php][Php.net]][Php-url]
 * [![JQuery][JQuery.com]][JQuery-url]
-* [![Tailwind][Tailwindcss.com]][Tailwind-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
 
@@ -101,3 +100,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
+[Php.net]:https://img.shields.io/badge/PHP-697AB1?style=for-the-badge&logo=Php&logoColor=white
+[Php-url]:https://www.php.net/
