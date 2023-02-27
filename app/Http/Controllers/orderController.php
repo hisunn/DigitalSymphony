@@ -11,43 +11,52 @@ class orderController extends Controller
 {
 
 
-    public function viewOrder()
+    public function viewOrder(Request $request)
     {
-        $id = auth()->user()->id;
-        //SELECT menu.menu_image, orders.item_name, orders.quantity, orders.item_price FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=2 ORDER BY orders.item_name;
-        // $sql = DB::select('SELECT paid_at FROM orders WHERE user_id='.$id);
+        $session_value = $request->session()->exists('users');
+        if ($request->session()->exists('id')) {
 
-        $quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
-        $quantity_temp = DB::select('SELECT SUM(quantity_temp) AS quantity_temp FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+            $id = auth()->user()->id;
+            //SELECT menu.menu_image, orders.item_name, orders.quantity, orders.item_price FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=2 ORDER BY orders.item_name;
+            // $sql = DB::select('SELECT paid_at FROM orders WHERE user_id='.$id);
 
-        foreach ($quantity as $quantity) {
+            $quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+            $quantity_temp = DB::select('SELECT SUM(quantity_temp) AS quantity_temp FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+
+            foreach ($quantity as $quantity) {
+            }
+            foreach ($quantity_temp as $quantity_temp) {
+            }
+            $order_quantity = $quantity->quantity;
+            $order_quantity_temp =  $quantity_temp->quantity_temp;
+
+
+            if ($order_quantity_temp > 0) {
+
+                return redirect(url('/payment-gateway'));
+            }
+
+            $sql = DB::select('SELECT menu.menu_image AS item_image, orders.item_name AS item_name, orders.quantity AS item_quantity, orders.item_price AS item_price, orders.item_id AS item_id, orders.deleted_at AS deleted_at  FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=' . $id . ' ORDER BY item_name');
+
+            return view('layouts.order')
+                // ->with('order_quantity', $order_quantity)
+                ->with('sql', $sql);
+        } else {
+            return redirect(url('/login'));
         }
-        foreach ($quantity_temp as $quantity_temp) {
-        }
-        $order_quantity = $quantity->quantity;
-        $order_quantity_temp =  $quantity_temp->quantity_temp;
-
-
-        if ($order_quantity_temp > 0) {
-
-            return redirect(url('/payment-gateway'));
-        }
-
-        $sql = DB::select('SELECT menu.menu_image AS item_image, orders.item_name AS item_name, orders.quantity AS item_quantity, orders.item_price AS item_price, orders.item_id AS item_id, orders.deleted_at AS deleted_at  FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=' . $id . ' ORDER BY item_name');
-
-
-
-        return view('layouts.order')
-            // ->with('order_quantity', $order_quantity)
-            ->with('sql', $sql);
     }
 
-    public function processPayment()
+    public function processPayment(Request $request)
     {
-        $id = auth()->user()->id;
-        // echo "payment success";
-        $sql = DB::select('SELECT menu.menu_image AS item_image, orders.item_name AS item_name, orders.quantity AS item_quantity, orders.item_price AS item_price, orders.item_id AS item_id FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=' . $id . ' ORDER BY item_name');
-        $total_quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+        if ($request->session()->exists('id')) {
+            $id = auth()->user()->id;
+            // echo "payment success";
+            $sql = DB::select('SELECT menu.menu_image AS item_image, orders.item_name AS item_name, orders.quantity AS item_quantity, orders.item_price AS item_price, orders.item_id AS item_id FROM menu INNER JOIN orders ON menu.id = orders.item_id WHERE orders.user_id=' . $id . ' ORDER BY item_name');
+            $total_quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+        } else {
+            return redirect(url('/login'));
+        }
+
 
 
 
@@ -133,9 +142,6 @@ class orderController extends Controller
             $display->quantity = 0;
         }
         return redirect(url('/order-list?quantity=' . $display->quantity));
-
-        // return view('layouts.order')
-        //     ->with('sql', $sql);
     }
 
     public function updateOrder(Request $request)
@@ -187,9 +193,13 @@ class orderController extends Controller
         return redirect(url('/successOrder'));
     }
 
-    public function successOrder()
+    public function successOrder(Request $request)
     {
-        return view('layouts.success');
+        if ($request->session()->exists('id')) {
+            return view('layouts.success');
+        } else {
+            return redirect(url('/'));
+        }
     }
 
     public function deleteOrder()
@@ -257,11 +267,13 @@ class orderController extends Controller
         return redirect(url('/payment-gateway'));
     }
 
-    public function viewHistory()
+    public function viewHistory(Request $request)
     {
-        $sql = DB::select('SELECT DISTINCT paid_at FROM orders_history ORDER BY paid_at DESC');
-
-
-        return view('layouts.history')->with('sql', $sql);
+        if ($request->session()->exists('id')) {
+            $sql = DB::select('SELECT DISTINCT paid_at FROM orders_history WHERE user_id=' . auth()->user()->id . ' ORDER BY paid_at DESC');
+            $sql2 = DB::select('SELECT DISTINCT COUNT(paid_at) AS history_count FROM orders_history WHERE user_id=' . auth()->user()->id . ' ORDER BY paid_at DESC LIMIT 1');
+            return view('layouts.history')->with('sql', $sql)->with('sql2', $sql2);
+        } else
+            return redirect(url('/login'));
     }
 }

@@ -10,46 +10,59 @@ use Illuminate\Support\Facades\DB;
 
 class menuController extends Controller
 {
-    public function viewMenu()
+    public function viewMenu(Request $request)
     {
-        $menu = menuModel::all();
-        return view('dashboard', ['menu' => $menu]);
+        session([
+            'id' => auth()->user()->id,
+            'username' => auth()->user()->name,
+        ]);
+
+        if ($request->session()->exists('id')) {
+            $menu = menuModel::all();
+            return view('dashboard', ['menu' => $menu]);
+        } else
+            return view("/");
     }
 
-    public function viewDetails()
+    public function viewDetails(Request $request)
     {
-        $id = auth()->user()->id;
-        // $order_value = DB::select('SELECT (quantity+quantity_temp) AS total FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+     
+        if ($request->session()->exists('id')) {
 
-        $quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
-        $quantity_temp = DB::select('SELECT SUM(quantity_temp) AS quantity_temp FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+            $id = auth()->user()->id;
 
-        foreach ($quantity as $quantity) {
-        }
-        foreach ($quantity_temp as $quantity_temp) {
-        }
+            $quantity = DB::select('SELECT SUM(quantity) AS quantity FROM orders WHERE user_id=' . $id . ' LIMIT 1');
+            $quantity_temp = DB::select('SELECT SUM(quantity_temp) AS quantity_temp FROM orders WHERE user_id=' . $id . ' LIMIT 1');
 
-        $order_quantity = $quantity->quantity;
-        $order_quantity_temp =  $quantity_temp->quantity_temp;
+            foreach ($quantity as $quantity) {
+            }
+            foreach ($quantity_temp as $quantity_temp) {
+            }
 
+            $order_quantity = $quantity->quantity;
+            $order_quantity_temp =  $quantity_temp->quantity_temp;
+            
+            if ($order_quantity_temp > 0) {
 
-        $is_ordering = $order_quantity + $order_quantity_temp;
+                return redirect(url('/payment-gateway'));
+            }
 
-        if ($order_quantity_temp > 0) {
+            $menu_type = $_GET['type'];
 
-            return redirect(url('/payment-gateway'));
-        }
+            $menu = menuModel::where('id', '=', $menu_type)->get();
 
-        $menu_type = $_GET['type'];
-
-        $menu = menuModel::where('id', '=', $menu_type)->get();
-
-        return view('layouts.food', ['details' => $menu]);
+            return view('layouts.food', ['details' => $menu]);
+        } else
+            return redirect(url('/login'));
     }
 
 
-    public function setting()
+    public function setting(Request $request)
     {
-        return view('settingDetails');
+        if ($request->session()->exists('id')) {
+
+            return view('settingDetails');
+        } else
+            return redirect(url('/login'));
     }
 }

@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('head')
+@foreach ($sql2 as $checkhistory)
+@endforeach
 
-<body class="d-flex flex-column min-vh-100">
+<body onload="checkHistory({{ $checkhistory->history_count }})" class="d-flex flex-column min-vh-100">
     @include('navbar')
 
-    <h1 class="text-xl-center mt-5 mb-5 text-gray-900">Order History</h1>
+    <h1 id="title" class="text-xl-center mt-5 mb-5 text-gray-900">Order History</h1>
     <div class="container-sm">
+        <div id="emptytitle">
+            <h1 id="emptymsg1" class="text-xl-center text-gray-900 mt-5">It Seems Empty Over Here...</h1>
+            <div class="d-flex justify-content-center mt-5">
+                <a id="emptymsg2" class="btn btn-primary text-center rounded-sm" href="dashboard">Order Now !</a>
+            </div>
+        </div>
+
+
         <ul class="list-group mb-5">
 
             @php
@@ -20,7 +30,7 @@
                     
                 @endphp
                 <li class="list-group-item">
-                    <p>Order Id: {{  substr(md5($timestamp),0,8) }}</p>
+                    <p>Order Id: {{ substr(md5($timestamp), 0, 8) }}</p>
                     @foreach ($query as $display)
                         <p>{{ $display->item_name }} <b>X</b> {{ $display->quantity }}</p>
                     @endforeach
@@ -36,3 +46,14 @@
 @include('footer')
 
 </html>
+
+<script>
+    function checkHistory(history_count) {
+        if (history_count == 0) {
+            $("#title").attr('hidden', true);
+        } else {
+            $("#title").attr('hidden', false);
+            $("#emptytitle").attr('hidden', true);
+        }
+    }
+</script>

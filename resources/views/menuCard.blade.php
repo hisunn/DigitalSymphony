@@ -7,9 +7,9 @@
         <div class="card-body p-4">
             <div class="text-center">
                 <!-- Product name-->
-                <h5 class="fw-bolder">{{$item->menu_name }}</h5>
+                <h5 class="fw-bolder text-gray-900">{{$item->menu_name }}</h5>
                 <!-- Product price-->
-                <p>RM {{$item->price}}</p>
+                <p class="text-gray-800">RM {{$item->price}}</p>
             </div>
         </div>
         <!-- Product actions-->

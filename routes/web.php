@@ -19,23 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [IndexController::class, 'index']);
 
-Route::get('dashboard', [IndexController::class, 'session'])
+Route::get('dashboard', [menuController::class, 'viewMenu'])
     ->name('dashboard')
     ->middleware(['auth']);
 
-Route::get('dashboard', [menuController::class, 'viewMenu']);
-
-Route::get('test', [IndexController::class, 'test']);
 
 Route::get('food', [menuController::class, 'viewDetails']);
-
-// Route::get('insertOrder', [menuController::class, 'insertOrder']);
-
 Route::get('setting', [menuController::class, 'setting']);
-
 Route::get('order-list', [orderController::class, 'viewOrder'])->name('orderlist');
 Route::get('payment-gateway', [orderController::class, 'processPayment']);
-
 Route::get('insertOrder', [orderController::class, 'insertOrder'])->name('controltest');
 Route::get('deleteOrder', [orderController::class, 'deleteOrder']);
 Route::get('deleteItem', [orderController::class, 'deleteItem']);
@@ -44,3 +36,6 @@ Route::get('updateOrder', [orderController::class, 'updateOrder']);
 Route::get('paidOrder', [orderController::class, 'paidOrder']);
 Route::get('successOrder', [orderController::class, 'successOrder']);
 Route::get('order-history', [orderController::class, 'viewHistory']);
+
+Route::get('test', [IndexController::class, 'test']);
+Route::get('logout', [IndexController::class, 'logout']);

@@ -20,18 +20,23 @@ class IndexController extends Controller
         $password = $_POST['pwd'];
         echo  $email, $password;
     }
-    public function viewRegister()
+    public function logout(Request $request)
     {
+        $request->session()->forget(['id','username']);
+        return view("/");
 
-        return view('register');
     }
 
 
     public function test(Request $request)
     {
         // var_dump(session('status'));
-
-        var_dump($request->session()->all());
+        // if ($request->session()->exists('users')) {
+        //     // will return true even the value is null
+        // }
+        var_dump($request->session()->get('id'));
+        var_dump($request->session()->get('username'));
+        var_dump(session('id'));
         // return view('test');
     }
 }

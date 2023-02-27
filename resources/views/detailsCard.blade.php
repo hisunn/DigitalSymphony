@@ -6,16 +6,16 @@
                         alt="..." /></div>
                 <div class="col-md-6">
                     <div class="small mb-1">PRODUCT ID: {{ $item->id }}</div>
-                    <h1 class="display-5 fw-bolder">{{ $item->menu_name }}</h1>
+                    <h1 class="display-5 fw-bolder text-gray-900">{{ $item->menu_name }}</h1>
                     <div class="fs-5 mb-5">
-                        <span>{{ 'RM' . $item->price }}</span>
+                        <span class="text-gray-800">{{ 'RM' . $item->price }}</span>
                     </div>
-                    <p class="lead">{{ $item->description }}</p>
+                    <p class="lead text-gray-900">{{ $item->description }}</p>
                     <form id="orderform">
                         <input type="text" hidden name="price" value="{{ $item->price }}">
                         <input type="text" hidden name="foodname" value="{{ $item->menu_name }}">
                         <input type="text" hidden name="url" value="{{ url('/') }}">
-                        <span>Quantity:</span> <label for="inputQuantity">
+                        <span class="text-gray-800">Quantity:</span> <label for="inputQuantity">
                             <input class="form-control text-center" id="inputQuantity" type="number" min="1"
                                 value="1" style="max-width: 4rem" name="amount" /></label>
                     </form>
