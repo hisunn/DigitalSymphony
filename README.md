@@ -8,6 +8,16 @@
 </p>
 
 
+  <h3 align="center">Simple Food Ordering System</h3>
+  <p align="center">
+    A simple food ordering system developed using laravel framework
+    <br />
+    <br />
+    <a href="https://hisunn.com/">View Demo (Active until 27/2/2024)</a>  
+  </p>
+</div>
+
+
 ## How to run system (locally)
 
 1. Clone this project and export db sql inside database/sql 
