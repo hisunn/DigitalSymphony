@@ -50,7 +50,7 @@ This project is built with a different kind of tools. Here's the list of the one
 ![Dashboard Screen](./public/readme_content/Dashboard.png)
 ![Menu Screen](./public/readme_content/Menu.png)
 ![OrderPage Screen](./public/readme_content/OrderPage.png)
---!>
+-->
 
 ## About Laravel
 
