@@ -16,8 +16,8 @@
 4. Copy .env.example file to .env on the root folder
 5. Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration
 6. Run php artisan key:generate
-7. php artisan migrate
-8. php artisan serve
+7. Run php artisan migrate
+8. Run php artisan serve
 
 ## About Laravel
 
