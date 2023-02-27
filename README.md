@@ -15,9 +15,9 @@
 3. Run composer install on your cmd or terminal
 4. Copy .env.example file to .env on the root folder
 5. Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration
-6. Run php artisan key:generate
-7. Run php artisan migrate
-8. Run php artisan serve
+6. Run php artisan key:generate on terminal/cmd
+7. Run php artisan migrate on terminal/cmd
+8. Run php artisan serve on terminal/cmd
 
 ## About Laravel
 
