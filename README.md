@@ -1,7 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-  <h1 align="center">Simple Food Ordering System</h1>
-  <hr>
+  <h1 align="center">Simple Food Ordering System</h1>  
   <p align="center">
     A simple food ordering system developed using laravel framework
     <br />
@@ -35,14 +34,14 @@ This project is built with a different kind of tools. Here's the list of the one
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![Startbootstrap][Startbootstrap.com]][Startbootstrap-url]
 
-<!-- 
+
 ## Snapshot of System
 
 ![Login Screen](./public/readme_content/LoginPage.png)
 ![Dashboard Screen](./public/readme_content/Dashboard.png)
 ![Menu Screen](./public/readme_content/Menu.png)
 ![OrderPage Screen](./public/readme_content/OrderPage.png)
--->
+
 
 ## Contact
 Hit me up !
