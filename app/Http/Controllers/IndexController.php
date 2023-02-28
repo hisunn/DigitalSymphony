@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
-    //
+    
     public function index()
     {
         return view('auth.login');
@@ -30,6 +30,7 @@ class IndexController extends Controller
 
     public function test(Request $request)
     {
+        // Testing Output Area
         // var_dump(session('status'));
         // if ($request->session()->exists('users')) {
         //     // will return true even the value is null
