@@ -64,7 +64,7 @@ class orderController extends Controller
 
     public function insertOrder(Request $request)
     {
-        // cara old skool
+        // cara old skool (VanillaPhp)
         // $order = new orderModel;
         // $menu = $_GET['foodtype'];
         // $menu_name = $_GET['foodname'];
@@ -113,8 +113,7 @@ class orderController extends Controller
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
-        }
-        // sini
+        }        
         $sql = DB::select('SELECT SUM(quantity) as quantity from orders where user_id=' . auth()->user()->id);
         // $sql = DB::select('SELECT COUNT(*) AS quantity FROM orders WHERE user_id=' . auth()->user()->id . ' AND deleted_at IS NULL');
         foreach ($sql as $display) {
@@ -145,9 +144,6 @@ class orderController extends Controller
     {
         $data = $request->input();
         $id = auth()->user()->id;
-        // var_dump($data['key1']);
-
-
 
         if (isset($data['key1'])) {
             $key1 = $data['key1'];
@@ -167,7 +163,6 @@ class orderController extends Controller
             $sql = DB::update('UPDATE orders SET quantity=' . $key4 . ' WHERE item_id=4 AND user_id=' . $id);
         }
 
-
         return redirect(url('/payment-gateway'));
     }
 
@@ -175,18 +170,11 @@ class orderController extends Controller
     {
         $id = auth()->user()->id;
         $sql = DB::update('UPDATE orders SET paid_at=CURRENT_TIMESTAMP() WHERE user_id=' . $id);
-
-
         $sql = DB::select('SELECT user_id, item_id, item_name, item_price, quantity, paid_at FROM orders WHERE user_id= ' . $id . ' ORDER BY item_id');
-
         foreach ($sql as $value) {
-
             DB::insert('INSERT INTO orders_history (user_id, item_id, item_name, item_price, quantity, paid_at ) VALUES(' . $value->user_id . ',' . $value->item_id . ',"' . $value->item_name . '",' . $value->item_price . ',' . $value->quantity . ', CURRENT_TIMESTAMP()' . ' )');
         }
-
         $sql = DB::delete('DELETE FROM orders WHERE user_id=' . $id);
-
-
         return redirect(url('/successOrder'));
     }
 
@@ -201,66 +189,38 @@ class orderController extends Controller
 
     public function deleteOrder()
     {
-        $id = auth()->user()->id;
-        // $item_id = $_GET['item_id'];
+        $id = auth()->user()->id;        
         $order = orderModel::where('user_id', $id)->delete();
-
-
         $sql = DB::select('SELECT COUNT(*) AS counter FROM orders WHERE user_id=' . $id . ' AND deleted_at IS NULL LIMIT 1');
 
-        foreach ($sql as $counter) {
-            # code...
-        }
+        foreach ($sql as $counter) { }
         $counter = $counter->counter;
 
         if ($counter == 0) {
-            # code...
-            // var_dump($counter);
-
             $sql = DB::select('SELECT quantity,item_id FROM orders WHERE user_id=' . $id . ' ORDER BY item_id ASC');
-
             foreach ($sql as $value) {
-
                 $sql = DB::update('UPDATE orders SET quantity_temp=' . $value->quantity . ' WHERE user_id=' . $id . ' AND item_id=' . $value->item_id);
                 $sql = DB::update('UPDATE orders SET quantity=0 WHERE user_id=' . $id . ' AND item_id=' . $value->item_id);
             }
-        }
-
-
-
-        // echo "hello";
-        return redirect(url('/payment-gateway'));
-        // return view('dashboard');
+        }       
+        return redirect(url('/payment-gateway'));        
     }
 
     public function restoreOrder()
     {
-        $id = auth()->user()->id;
-        // $item_id = $_GET['item_id'];
+        $id = auth()->user()->id;        
         $order = orderModel::withTrashed()->where('user_id', $id);
         $order->restore();
-
         $sql = DB::select('SELECT COUNT(*) AS counter FROM orders WHERE user_id=' . $id . ' AND deleted_at IS NULL LIMIT 1');
-
-        foreach ($sql as $counter) {
-            # code...
-        }
+        foreach ($sql as $counter) {}
         $counter = $counter->counter;
-
         if ($counter > 0) {
-            # code...
-            // var_dump($counter);
-
             $sql = DB::select('SELECT quantity_temp,item_id FROM orders WHERE user_id=' . $id . ' ORDER BY item_id ASC');
-
             foreach ($sql as $value) {
-
                 $sql = DB::update('UPDATE orders SET quantity=' . $value->quantity_temp . ' WHERE user_id=' . $id . ' AND item_id=' . $value->item_id);
                 $sql = DB::update('UPDATE orders SET quantity_temp=0 WHERE user_id=' . $id . ' AND item_id=' . $value->item_id);
             }
-        }
-
-        // echo "hello";
+        }        
         return redirect(url('/payment-gateway'));
     }
 
