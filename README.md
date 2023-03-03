@@ -8,7 +8,7 @@
     <a href="https://hisunn.com/">View Demo (Active until 27/2/2024)</a>  
   </p>
 </div>
-asdasd
+
 
 ## How to run system (locally)
 
